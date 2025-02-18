@@ -1,5 +1,3 @@
-import { resolve } from "path";
-
 import chokidar, { type FSWatcher } from "chokidar";
 import { DEFAULT_IGNORED_DIRS } from "../constants";
 

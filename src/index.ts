@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import readline from 'readline';
+import readline from "readline";
 
 import Recorder from "./classes/recorder";
 import Logger from "./classes/logger";
@@ -10,7 +10,7 @@ const program = new Command();
 const recorder = new Recorder();
 const rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout
+    output: process.stdout,
 });
 
 program.name("boil").description("A CLI tool to manage your boilerplate").version("1.0.0");
