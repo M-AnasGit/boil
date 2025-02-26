@@ -32,7 +32,7 @@ describe("Adding child to the tree", () => {
 
     it("should not add a child to a non-existent directory", () => {
         baseDirectory.addChild(new FileNode("3rd_dir/nested_file.py"));
-        expect(baseDirectory.findNode(["3rd_dir", "/nested_file.py"])).toBe(null);
+        expect(baseDirectory.findNode(["3rd_dir", "nested_file.py"])).toBe(null);
     });
 
     it("should not add a child that already exists", () => {

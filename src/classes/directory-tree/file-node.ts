@@ -11,4 +11,8 @@ export default class FileNode extends BaseNode {
     updateContent(newContent: string) {
         this.content = newContent;
     }
+
+    getContent() {
+        return this.content;
+    }
 }

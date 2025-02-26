@@ -43,7 +43,9 @@ export default class DirectoryNode extends BaseNode {
             return;
         }
 
-        parent.children.set(child.pathName, child);
+        const updated_path = pathSegments[pathSegments.length - 1]
+        child.updateName(updated_path)
+        parent.children.set(updated_path, child);
     }
 
     /**
@@ -53,6 +55,7 @@ export default class DirectoryNode extends BaseNode {
      */
     removeChild(pathName: string): BaseNode | null {
         const pathSegments = pathName.split("/").filter(Boolean);
+        const file_name = pathSegments[pathSegments.length - 1]
         const parent = this.findParentNode(pathSegments);
 
         if (!parent) {
@@ -60,13 +63,13 @@ export default class DirectoryNode extends BaseNode {
             return null;
         }
 
-        if (!parent.children.has(pathName)) {
-            Logger.logWarning(`Child ${pathName} not found.`);
+        if (!parent.children.has(file_name)) {
+            Logger.logWarning(`Child ${file_name} not found.`);
             return null;
         }
 
-        const child = this.children.get(pathName);
-        this.children.delete(pathName);
+        const child = parent.children.get(file_name);
+        parent.children.delete(file_name);
         return child ?? null;
     }
 
@@ -76,7 +79,8 @@ export default class DirectoryNode extends BaseNode {
      * @param newName - The new name to assign.
      */
     updateChildName(oldName: string, newName: string) {
-        if (!this.children.has(oldName)) {
+        const pathSegments = oldName.split("/").filter(Boolean);
+        if (!this.findNode(pathSegments)) {
             Logger.logWarning(`Child ${oldName} not found.`);
             return;
         }
